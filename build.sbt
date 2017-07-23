@@ -25,8 +25,6 @@ libraryDependencies ++= Seq(
 fork in run := true
 
 javaOptions in root ++= Seq(
-    "-Djavax.net.debug=ssl:handshake",
-
     // Turn on HTTPS, turn off HTTP.
     // This should be https://example.com:9443
     "-Dhttp.port=disabled",
@@ -41,7 +39,7 @@ javaOptions in root ++= Seq(
     "-Dplay.http.sslengineprovider=https.CustomSSLEngineProvider",
 
     // Enable this if you want to turn on client authentication
-    //"-Dplay.ssl.needClientAuth=true"
+    //"-Dplay.ssl.needClientAuth=true",
 
     // Enable the handshake parameter to be extended for better protection.
     // http://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/JSSERefGuide.html//customizing_dh_keys
@@ -66,20 +64,20 @@ javaOptions in root ++= Seq(
     // http://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/JSSERefGuide.html//descPhase2
     // Defined in JDK 1.8 sun.security.ssl.Handshaker.java:194
     "-Dsun.security.ssl.allowUnsafeRenegotiation=false",
-    "-Dsun.security.ssl.allowLegacyHelloMessages=false"
+    "-Dsun.security.ssl.allowLegacyHelloMessages=false",
 
     // Enable this if you need to use OCSP or CRL
     // http://docs.oracle.com/javase/8/docs/technotes/guides/security/certpath/CertPathProgGuide.html//AppC
-    //"-Dcom.sun.security.enableCRLDP=true"
-    //"-Dcom.sun.net.ssl.checkRevocation=true"
+    //"-Dcom.sun.security.enableCRLDP=true",
+    //"-Dcom.sun.net.ssl.checkRevocation=true",
 
     // Enable this if you need TLS debugging
     // http://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/JSSERefGuide.html//Debug
-    //"-Djavax.net.debug=ssl:handshake"
+    //"-Djavax.net.debug=ssl:handshake",
 
     // Change this if you need X.509 certificate debugging
     // http://docs.oracle.com/javase/8/docs/technotes/guides/security/troubleshooting-security.html
-    //"-Djava.security.debug=certpath:x509:ocsp"
+    //"-Djava.security.debug=certpath:x509:ocsp",
 
     // Uncomment if you want to run "./play client" explicitly without SNI.
     //"-Djsse.enableSNIExtension=false"
