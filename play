@@ -2,19 +2,12 @@
 
 set -x
 
-SBT=sbt
-
-DIR=$(readlink -f $(dirname "${BASH_SOURCE[0]}"))
-
 # Export the keystore password for use in ws.conf
-export KEY_PASSWORD=`cat scripts/password`
-
-JVM_OPTIONS="$JVM_OPTIONS -Dkey.password=$KEY_PASSWORD"
-JVM_OPTIONS="$JVM_OPTIONS -DcertificateDirectory=$DIR/scripts"
+export KEY_PASSWORD=$(<scripts/password)
 
 AGENT=$(find ~/.ivy2/cache -name 'jetty-alpn-agent-*.jar' | head -1)
-#$DIR/target/universal/stage/jetty-alpn-agent/jetty-alpn-agent-2.0.6.jar
-
-
-# Run Play (this should work for both run and start).
-SBT_OPTS="-javaagent:$AGENT" $SBT $JVM_OPTIONS "$@"
+if [ -n "$AGENT" ]; then
+    SBT_OPTS+=" -javaagent:$AGENT"
+    export SBT_OPTS
+fi
+sbt "$@"

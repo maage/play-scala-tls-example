@@ -80,7 +80,9 @@ javaOptions in root ++= Seq(
     //"-Djava.security.debug=certpath:x509:ocsp",
 
     // Uncomment if you want to run "./play client" explicitly without SNI.
-    //"-Djsse.enableSNIExtension=false"
+    //"-Djsse.enableSNIExtension=false",
+
+    "-DcertificateDirectory=scripts"
 )
 
 addCommandAlias("client", "runMain Main")
