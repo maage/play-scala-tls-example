@@ -17,6 +17,9 @@ libraryDependencies ++= Seq(
     ws,
     guice,
     "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.1" % Test,
+
+    // https://mvnrepository.com/artifact/org.mortbay.jetty.alpn/jetty-alpn-agent
+    "org.mortbay.jetty.alpn" % "jetty-alpn-agent" % "2.0.6"
 )
 
 fork in run := true
@@ -83,3 +86,10 @@ javaOptions in root ++= Seq(
 )
 
 addCommandAlias("client", "runMain Main")
+
+import com.typesafe.sbt.packager.archetypes.systemloader._
+enablePlugins(JavaServerAppPackaging, SystemdPlugin)
+
+requiredStartFacilities := Some("systemd-journald.service")
+
+javaAgents += "org.mortbay.jetty.alpn" % "jetty-alpn-agent" % "2.0.6" % "dist"
