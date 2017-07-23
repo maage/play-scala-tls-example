@@ -13,9 +13,11 @@ lazy val root = (project in file("."))
 
 scalaVersion := "2.12.2"
 
-libraryDependencies += ws
-libraryDependencies += guice
-libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.0.0-M3" % Test
+libraryDependencies ++= Seq(
+    ws,
+    guice,
+    "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.1" % Test,
+)
 
 fork in run := true
 
